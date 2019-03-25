@@ -1,0 +1,183 @@
+<mat-card class="sign-up-card">
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-vertical-stepper [linear]="isLinear"  #stepper>
+  <mat-step [stepControl]="Users" [editable]="isEditable">
+    <form [formGroup]="Users">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="User Name" formControlName="Username" required>
+          </mat-form-field>
+          <mat-error *ngIf="Users.controls['Username'].hasError('required')" class="small">
+              User Name is <strong>required</strong>
+          </mat-error>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width"> 
+          <input matInput placeholder="Password" type="password" formControlName="Password" required>
+        </mat-form-field>
+        <mat-error *ngIf="Users.controls['Password'].hasError('required')" class="small">
+            Password is <strong>required</strong>
+        </mat-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Retype Password" type="password" formControlName="RetypePassword" required>
+        </mat-form-field>
+        <mat-error *ngIf="Users.controls['RetypePassword'].hasError('required'); else elseblock" class="small">
+            You Must <strong>Retype</strong> The Password
+        </mat-error>
+        <ng-template #elseblock>
+        <mat-error *ngIf="Users.value['RetypePassword']!==Users.value['Password']" class="small">
+            <strong>Retype</strong> Password And <strong>Password</strong> must be same.
+        </mat-error>
+      </ng-template>
+        
+      </div>
+    </div>
+      
+      <div>
+        <button mat-button (click)="tryRegister(Users,stepper)">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="AddressForm">
+    <form [formGroup]="AddressForm">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Address" formControlName="First_line"></textarea>
+              <mat-error *ngIf="AddressForm.controls['First_line'].hasError('required')">
+                Address is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="row" *ngIf="!hasUnitNumber">
+          <div class="col">
+            <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+              + Add C/O, Apt, Suite, Unit
+            </button>
+          </div>
+        </div>
+        
+        <div class="row" *ngIf="hasUnitNumber">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Address 2" formControlName="Second_line"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="City" formControlName="City">
+              <mat-error *ngIf="AddressForm.controls['City'].hasError('required')">
+                City is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="State" formControlName="State">
+              <mat-error *ngIf="AddressForm.controls['State'].hasError('required')">
+                State is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Country" formControlName="Country">
+                  <mat-error *ngIf="AddressForm.controls['Country'].hasError('required')">
+                    Country is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+          </div>
+        </div>
+     <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="setAddress(AddressForm,stepper)">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="UserDetails">
+      <form [formGroup]="UserDetails">
+        <ng-template matStepLabel>Fill out your Details</ng-template>
+        <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="First name" formControlName="First_name">
+                <mat-error *ngIf="UserDetails.controls['First_name'].hasError('required')">
+                  First name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Last name" formControlName="Last_name">
+                <mat-error *ngIf="UserDetails.controls['Last_name'].hasError('required')">
+                  Last name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Email" formControlName="Email">
+                    <mat-error *ngIf="UserDetails.controls['Email'].hasError('required');">
+                      Email is <strong>required</strong>
+                    </mat-error>
+                    <!-- <ng-template #b>
+                        <mat-error *ngIf="UserDetails.controls['Email'].hasError('email');">
+                            Enter <strong>Valid</strong> Email
+                          </mat-error>
+                    </ng-template> -->
+                  </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <mat-form-field class="full-width">
+                      <input matInput placeholder="Contact no" formControlName="Contact_no">
+                      <mat-error *ngIf="UserDetails.controls['Contact_no'].hasError('required');">
+                        Contact No is <strong>required</strong>
+                      </mat-error>
+                      <!-- <ng-template #b2>
+                          <mat-error *ngIf="UserDetails.controls['Contact_no'].hasError('pattern');">
+                              Enter <strong>Valid</strong> Phone No
+                            </mat-error>
+                      </ng-template> -->
+                    </mat-form-field>
+              </div>
+          </div>
+       <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="setUserDetails(UserDetails,stepper)">Next</button>
+        </div>
+      </form>
+    </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button routerLink="/Login">Done</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+</mat-card>

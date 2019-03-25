@@ -1,0 +1,22 @@
+.mat-card{
+    margin:1px 0px;
+}
+
+.mat-card-header{
+    width:100%;
+}
+
+.title{
+    font-size:1.5em;
+    font-stretch: expanded;
+}
+
+.block{
+    min-width: 512px;
+}
+
+p{
+    font-size: 1.5em;
+    margin: 0 0 0 2em;
+    text-align: justify;
+}

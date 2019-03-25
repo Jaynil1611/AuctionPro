@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+    <mat-toolbar routerLink="/">{{currentUser==null ? 'Menu' : currentUser.Username}}</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Home</a>
+      <div class="none" *ngIf="currentUser && currentUser.Token; else loggedOut">
+        <a mat-list-item href="#">Your Products</a>
+        <a mat-list-item href="#">Your Auctions</a>
+        <a mat-list-item href="#">Auction Admin</a>
+        <a mat-list-item href="#" (click)="logout()">Logout</a>
+      </div>
+      <ng-template #loggedOut>
+        <a mat-list-item href="#" routerLink="/Login" (click)="login()">Login</a>
+      </ng-template>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Secure Online Auction</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
