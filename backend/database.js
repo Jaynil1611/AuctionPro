@@ -2,9 +2,9 @@ const mysql = require('mysql2');
 
 const pool = mysql.createPool({
     host: 'secureonlineauction.cnzzbypo4cdl.ap-south-1.rds.amazonaws.com',
-    user: 'WizardLord',
+    user: 'Jaynil',
     database: 'SecureOnlineAuction',
-    password: 'myfamily1',
+    password: 'jaynil123',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
