@@ -3,19 +3,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule,MatTabsModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
 import { DataTableComponent } from './data-table/data-table.component';
 import { LoginComponent } from './forms/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 
 import { UserService } from "./services/user.service";
 import { AuthService } from "./services/auth.service";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuctionAdminComponent } from './auction-admin/auction-admin.component';
+import { AuctionComponent } from './auction/auction.component';
+import { AuctionService } from './services/auction.service';
+import { WebsocketService } from './services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DataTableComponent,
     LoginComponent,
     SignUpComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AuctionAdminComponent,
+    AuctionComponent
   ],
   imports: [
     BrowserModule,
@@ -39,19 +46,26 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatPaginatorModule,
     MatSortModule,
     MatStepperModule,
+    MatTabsModule,
     RouterModule.forRoot([
       {path:"",component:UserProfileComponent},
       {path:"Login",component:LoginComponent},
-      {path:"Sign_up",component:SignUpComponent}
+      {path:"Sign_up",component:SignUpComponent},
+      {path:"AuctionAdmin",component:AuctionAdminComponent},
+      {path:"Auction",component:AuctionComponent}
     ]),
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
+    FormsModule,
+    NgxMaterialTimepickerModule,
     HttpClientModule
     ],
-  providers: [UserService,AuthService],
+  providers: [UserService,AuthService,AuctionService,WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

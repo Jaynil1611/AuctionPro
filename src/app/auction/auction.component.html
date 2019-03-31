@@ -1,0 +1,7 @@
+
+    <mat-card *ngFor="let product of products" style="padding-bottom:2em">
+      <h3>{{product.Product_name}}</h3>
+      <p>{{product.Product_description}}</p>
+      <p>{{product.Base_price}}</p>
+      <button mat-fab (click)="doBid(product)" style="float:right ;z-index:1">+</button>
+    </mat-card>

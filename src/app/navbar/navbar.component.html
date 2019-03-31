@@ -8,8 +8,8 @@
       <a mat-list-item href="#">Home</a>
       <div class="none" *ngIf="currentUser && currentUser.Token; else loggedOut">
         <a mat-list-item href="#">Your Products</a>
-        <a mat-list-item href="#">Your Auctions</a>
-        <a mat-list-item href="#">Auction Admin</a>
+        <a mat-list-item href="#" routerLink="/Auction">Your Auctions</a>
+        <a mat-list-item href="#" routerLink="/AuctionAdmin">Auction Admin</a>
         <a mat-list-item href="#" (click)="logout()">Logout</a>
       </div>
       <ng-template #loggedOut>
