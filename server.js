@@ -65,6 +65,40 @@ io.on("connection", socket => {
     io.emit("message", { type: "new-message", text: message });
   });
 
+  socket.on("auction_create",auction=>
+  {
+    let Auction=JSON.parse(auction);
+    delete Auction.type;
+    console.log(JSON.stringify(Auction));
+    let sql="INSERT INTO Auction set ?";
+    pool.query(
+      sql,[Auction],(err,rows,fields)=>
+      {
+        if(err)
+        console.log(err);
+        else
+        {
+          socket.send({type:"auction_create","content":Auction});
+        }
+      }
+    )
+  })
+  socket.on("auction_get",aucget=>
+  {
+    let sql="Select * from Auction where Created_by=?";
+    console.log(aucget);
+    pool.query(sql,[JSON.parse(aucget).content],(error,rows,fields)=>
+    {
+      if(error)
+        console.log(error);
+      else
+        {
+          console.log(rows);
+          socket.send({type:"auction_get","content":rows});
+        }
+
+  })
+})
   socket.on("register_product",product=>
   {
     let Product=JSON.parse(product);
@@ -79,7 +113,7 @@ io.on("connection", socket => {
         {
           Product["Product_Id"]=rows['insertId'];
           console.log(Product);
-          io.emit("message",{ type:"register_product",content:Product});
+          socket.send({ type:"register_product",content:Product});
         }
     })
   })
@@ -95,6 +129,7 @@ io.on("connection", socket => {
           socket.send({type:"user_products","content":rows});}
     })
   })
+  
   socket.on("bid",bid => {
     let Bid=JSON.parse(bid);
     delete Bid.type;

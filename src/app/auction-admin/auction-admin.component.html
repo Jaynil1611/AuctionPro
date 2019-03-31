@@ -1,5 +1,9 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Your Auctions">Content 1</mat-tab>
+  <mat-tab label="Your Auctions">
+    <mat-card *ngFor="let auction of Auctions">
+      {{Auctions | json}}
+    </mat-card>
+  </mat-tab>
   <mat-tab label="Create Auction">
     <mat-card>
       <form [formGroup]="Auction">
@@ -16,48 +20,35 @@
       <div class="row">
         <div class="col">
             <mat-form-field class="full-width">
-                <textarea matInput rows="3" placeholder="Description" formControlName="Description"></textarea>
+                <textarea matInput rows="3" placeholder="Description" formControlName="Auction_description"></textarea>
             </mat-form-field>
-            <mat-error *ngIf="Auction.controls['Description'].hasError('required')" class="small">
+            <mat-error *ngIf="Auction.controls['Auction_description'].hasError('required')" class="small">
                 Description is <strong>required</strong>
             </mat-error>
         </div>
       </div>
       <div class="row">
-        <div class="col">
-            <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="startdatepicker" placeholder="Choose A Start date">
-                <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #startdatepicker startView="month" [startAt]="startDate"></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="col">
-            <mat-form-field class="full-width">          
-              <input matInput disabled placeholder="Chose A Start Time" [ngxTimepicker]="starttimepicker">
-              <ngx-material-timepicker #starttimepicker></ngx-material-timepicker>
-            </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
           <div class="col">
-              <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="enddatepicker" placeholder="Choose A End date">
-                  <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
-                  <mat-datepicker #enddatepicker startView="month" [startAt]="startDate"></mat-datepicker>
+              <mat-form-field class="full-width" >
+                <input type="datetime-local" matInput placeholder="Enter Start Time" formControlName="Start_time">
               </mat-form-field>
+              <mat-error *ngIf="Auction.controls['Start_time'].hasError('required')" class="small">
+                  Start_time is <strong>required</strong>
+              </mat-error>
           </div>
           <div class="col">
               <mat-form-field class="full-width">          
-                <input matInput disabled placeholder="Chose A End Time" [ngxTimepicker]="endtimepicker">
-                <ngx-material-timepicker #endtimepicker></ngx-material-timepicker>
+                <input type="datetime-local" matInput placeholder="Enter End Time" formControlName="End_time">
               </mat-form-field>
+              <mat-error *ngIf="Auction.controls['End_time'].hasError('required')" class="small">
+                  End_time is <strong>required</strong>
+              </mat-error>  
           </div>
         </div>
       <div>
-        <button mat-button>Next</button>
+        <button mat-button (click)="addAuctions(Auction)">Next</button>{{ Auction.value | json}}
       </div>
     </form>
   </mat-card>
-
   </mat-tab>
 </mat-tab-group>

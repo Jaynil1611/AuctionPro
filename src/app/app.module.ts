@@ -22,6 +22,7 @@ import { AuctionComponent } from './auction/auction.component';
 import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
 import { ProductService } from './services/product.service';
+import { AuctionAdminService } from './services/auction-admin.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { ProductService } from './services/product.service';
     NgxMaterialTimepickerModule,
     HttpClientModule
     ],
-  providers: [UserService,AuthService,AuctionService,WebsocketService,ProductService],
+  providers: [UserService,AuthService,AuctionService,WebsocketService,ProductService,AuctionAdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
