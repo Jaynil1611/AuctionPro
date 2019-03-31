@@ -1,36 +1,31 @@
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
-import { Subject,Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuctionService {
+export class ProductService {
 
-  messages:Subject<any>;
-  // Products:Subject<any>;
-
+ messages : Subject<any>;
   constructor(private wsService: WebsocketService) {
     this.messages = <Subject<any>>wsService
       .connect().pipe(
         map((response: any): any => {
         return response;
       }))
-      
+
    }
-  sendMsg(msg) {
-    msg["type"]="message";
-    this.messages.next(msg);
+   addProducts(msg)
+   {
+     msg["type"]="register_product";
+     this.messages.next(msg);
+   }
+   
+  getUserProducts(msg)
+  {
+   msg["type"]="user_products";
+   this.messages.next(msg); 
   }
-  doBid(msg){
-    msg["type"]="bid";
-    this.messages.next(msg);
-  }
-  getProducts(msg){
-    msg["type"]="auction_products";
-    this.messages.next(msg);
-  }
-    
 }

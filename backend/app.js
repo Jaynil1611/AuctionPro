@@ -129,8 +129,9 @@ app.post("/api/Login",(req,res)=>{
                 console.log(err);
                 res.send(400,err.code);
             }
+            else if(rows[0]==undefined) res.send(400,"Invalid User Name");
             else{
-                    console.log(rows);
+                    console.log("rows:" +rows[0]);
                     let payload={
                         "Username":rows[0]["Username"],
                         "User_Id":rows[0]["User_Id"]

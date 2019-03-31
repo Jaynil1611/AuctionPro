@@ -65,6 +65,36 @@ io.on("connection", socket => {
     io.emit("message", { type: "new-message", text: message });
   });
 
+  socket.on("register_product",product=>
+  {
+    let Product=JSON.parse(product);
+    delete Product.type;
+    console.log(JSON.stringify(Product));
+    let sql="INSERT INTO Product SET ?";
+    pool.query(sql,[Product],(err,rows,fields)=>
+    {
+      if(err)
+        console.log(error);
+      else
+        {
+          Product["Product_Id"]=rows['insertId'];
+          console.log(Product);
+          io.emit("message",{ type:"register_product",content:Product});
+        }
+    })
+  })
+
+  socket.on("user_products",req=>{
+    let sql="Select * from Product where User_Id=?";
+    console.log(req);
+    pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
+      if(error)
+        console.log(error);
+      else
+        {console.log(rows)
+          socket.send({type:"user_products","content":rows});}
+    })
+  })
   socket.on("bid",bid => {
     let Bid=JSON.parse(bid);
     delete Bid.type;

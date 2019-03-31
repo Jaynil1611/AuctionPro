@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
-
+import { ProductsComponent } from "./products/products.component";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,12 +21,14 @@ import { AuctionAdminComponent } from './auction-admin/auction-admin.component';
 import { AuctionComponent } from './auction/auction.component';
 import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     DataTableComponent,
+    ProductsComponent,
     LoginComponent,
     SignUpComponent,
     UserProfileComponent,
@@ -52,7 +54,8 @@ import { WebsocketService } from './services/websocket.service';
       {path:"Login",component:LoginComponent},
       {path:"Sign_up",component:SignUpComponent},
       {path:"AuctionAdmin",component:AuctionAdminComponent},
-      {path:"Auction",component:AuctionComponent}
+      {path:"Auction",component:AuctionComponent},
+      {path :"Products",component: ProductsComponent}
     ]),
     MatInputModule,
     MatSelectModule,
@@ -65,7 +68,7 @@ import { WebsocketService } from './services/websocket.service';
     NgxMaterialTimepickerModule,
     HttpClientModule
     ],
-  providers: [UserService,AuthService,AuctionService,WebsocketService],
+  providers: [UserService,AuthService,AuctionService,WebsocketService,ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
