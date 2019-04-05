@@ -1,18 +1,22 @@
 <mat-card >
   <mat-card-title-group style="color:#E65100">
-    <mat-card-title >WizardLord</mat-card-title>
-    <mat-card-subtitle >-05/05/1999</mat-card-subtitle>
+    <mat-card-title ><span style="opacity: 0.5;">#{{profile.User_Id}})</span>{{profile.Username}}</mat-card-title>
+    <mat-card-subtitle >-Joined {{profile.Created_at|date}}</mat-card-subtitle>
     <img mat-card-md-image src="https://randomuser.me/api/portraits/lego/5.jpg">
   </mat-card-title-group>
-  <mat-divider [vertical]="true"></mat-divider>
   <mat-card-content>
     <mat-card class="block">
+        <p><b> Name</b> :{{profile.First_name}} {{profile.Last_name}}</p>
+        <p><b>Email</b> {{profile.Email}}</p>
+        <p><b>Contact_no</b> {{profile.Contact_no}}</p>
+    </mat-card>
+    <mat-card class="block">
       <mat-card-title>Address</mat-card-title>
-    <p>D-447 Mahindra colony,</p>
-    <p>near shri-krishna nagar Borivali (E),</p>
-    <p>Mumbai,</p>
-    <p>Mahastra,</p>
-    <p>India</p>
+    <p>{{profile.First_line}},</p>
+    <p>{{profile.Last_line}},</p>
+    <p>{{profile.City}},</p>
+    <p>{{profile.State}},</p>
+    <p>{{profile.Country}}</p>
   </mat-card>
   </mat-card-content>
 

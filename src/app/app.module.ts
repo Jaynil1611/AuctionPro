@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule,MatTabsModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule,MatTabsModule,MatDatepickerModule,MatNativeDateModule, MatSnackBarModule } from '@angular/material';
 import { DataTableComponent } from './data-table/data-table.component';
 import { LoginComponent } from './forms/login/login.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
@@ -65,6 +65,7 @@ import { AuctionAdminService } from './services/auction-admin.service';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     FormsModule,
     NgxMaterialTimepickerModule,
     HttpClientModule

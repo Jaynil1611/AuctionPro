@@ -8,6 +8,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuctionService {
+  getAuctionDetails(msg) {
+    msg["type"]="auction_details";
+    this.messages.next(msg);
+  }
 
   messages:Subject<any>;
   // Products:Subject<any>;
