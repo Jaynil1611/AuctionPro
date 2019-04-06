@@ -23,6 +23,10 @@ export class UserService {
     return this.http.post("http://localhost:3000/api/User_details",UserDetails);
   }
   
+  getUserDetails(UserId){
+    return this.http.get("http://localhost:3000/api/Users/"+UserId);
+  }
+
   constructor(private http:HttpClient) { }
 
 }

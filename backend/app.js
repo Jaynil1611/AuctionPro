@@ -45,28 +45,40 @@ app.get('/api/tables',(req,res)=>{
 //         })
 // })
 
-app.get("/api/Users",(req,res)=>{
-    let sql = "SELECT User_Id , Username FROM Users";
-    let first = true;
-    for(const key in req.query){
-        if(first){
-            sql=sql+" WHERE "+key+" = '"+req.query[key]+"'";
-            first=false
-        }else{
-            sql=sql+" AND "+key+" = '"+req.query[key]+"'";
-        }
-    }
-    pool.query(sql,
-        (err,rows,feilds)=>{
-            if(err){
-                console.log(err);
-                res.send(400);
-            }
-            else{
-                res.send(rows);
-            }
-        }
-    )
+// app.get("/api/Users",(req,res)=>{
+//     let sql = "SELECT User_Id , Username FROM Users";
+//     let first = true;
+//     for(const key in req.query){
+//         if(first){
+//             sql=sql+" WHERE "+key+" = '"+req.query[key]+"'";
+//             first=false
+//         }else{
+//             sql=sql+" AND "+key+" = '"+req.query[key]+"'";
+//         }
+//     }
+//     pool.query(sql,
+//         (err,rows,feilds)=>{
+//             if(err){
+//                 console.log(err);
+//                 res.send(400);
+//             }
+//             else{
+//                 res.send(rows);
+//             }
+//         }
+//     )
+// })
+
+app.get("/api/Users/:id",(req,res)=>{
+    console.log(req.params.id);
+    let sql = "select Users.Username,Users.Created_at,User_details.*,Address.* from Users left join Address on Address.User_Id=Users.User_Id left join User_details on User_details.User_Id=Users.User_Id where Users.User_Id=?"
+    pool.query(sql,[req.params.id],(err,rows,fields)=>{
+        if(err)
+            console.log(err);
+        else
+            res.send(201,rows);
+
+    })
 })
 
 app.post("/api/Users",(req,res)=>{

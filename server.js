@@ -134,12 +134,23 @@ io.on("connection", socket => {
     let Bid=JSON.parse(bid);
     delete Bid.type;
     console.log(JSON.stringify(Bid));
-    let sql = "Insert into Bid Set ? ";
+    let sql = "Insert into Bid Set ? ; Select Username from Users Where User_Id="+Bid.User_Id;
     pool.query(sql,[Bid],(err,rows,fields)=>{
       if(err)
+        console.log(err);
+      else{
+        io.emit("message",{ type:"bid",content:{"Product_Id":Bid.Product_Id,"Username":rows[1][0].Username,"Base_price":Bid.Bid_amount}});
+      }
+    })
+  })
+
+  socket.on("auction_details",req=>{
+    let sql="Select Auction_Id,Title,Auction_description,Username,Auction.Created_at,Start_time,End_time from Auction,Users WHERE Auction_Id=1 and Created_by=User_Id;";
+    pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
+      if(error)
         console.log(error);
       else
-        io.emit("message",{ type:"bid",content:{"Product_Id":Bid.Product_Id,"Base_price":Bid.Bid_amount}});
+        socket.send({type:"auction_details","content":rows});
     })
   })
 
