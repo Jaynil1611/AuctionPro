@@ -1,7 +1,86 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Your Auctions">
-    <mat-card *ngFor="let auction of Auctions">
-      {{Auctions | json}}
+    <mat-card>
+      <div *ngFor="let item of Auctions">
+        {{item | json }}
+      </div>
+    </mat-card>
+     <table mat-table [dataSource]="Auctions" >
+      <ng-container matColumnDef="Auction_Id">
+        <th mat-header-cell *matHeaderCellDef > Auction_Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Auction_Id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Title">
+          <th mat-header-cell *matHeaderCellDef > Auction_Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Auction_description">
+        <th mat-header-cell *matHeaderCellDef > Auction_description </th>
+        <td mat-cell *matCellDef="let element"> {{element.Auction_description}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Created_by">
+          <th mat-header-cell *matHeaderCellDef > CREATED_BY </th>
+          <td mat-cell *matCellDef="let element"> {{element.Created_by}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Created_at">
+        <th mat-header-cell *matHeaderCellDef > CREATED_AT </th>
+        <td mat-cell *matCellDef="let element"> {{element.Created_at}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Start_time">
+        <th mat-header-cell *matHeaderCellDef > START </th>
+        <td mat-cell *matCellDef="let element"> {{element.Start_time}} </td>
+      </ng-container>
+      <ng-container matColumnDef="End_time">
+        <th mat-header-cell *matHeaderCellDef > END </th>
+        <td mat-cell *matCellDef="let element"> {{element.End_time}} </td>
+      </ng-container>
+
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!-- <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion> -->
+    <mat-card>
+      <div class="container">
+        <h2>Products Selected </h2>
+        
+        <div
+          cdkDropList
+          #ProductSelectList="cdkDropList"
+          [cdkDropListData]="ProductSelect"
+          [cdkDropListConnectedTo]="[ProductGList]"
+          class="list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="box" *ngFor="let item of ProductSelect" cdkDrag>{{item.Product_name | json}}</div>
+        </div>
+      </div>
+      <br>
+      <div class="container">
+        <h2>Choose Products </h2>
+      
+        <div
+          cdkDropList
+          #ProductGList="cdkDropList"
+          [cdkDropListData]="ProductG"
+          [cdkDropListConnectedTo]="[ProductSelectList]"
+          class="list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="box" *ngFor="let item of ProductG" cdkDrag>{{item.Product_name | json}}</div>
+        </div>
+      </div>      
     </mat-card>
   </mat-tab>
   <mat-tab label="Create Auction">

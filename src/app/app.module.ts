@@ -23,7 +23,8 @@ import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
 import { ProductService } from './services/product.service';
 import { AuctionAdminService } from './services/auction-admin.service';
-
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { AuctionAdminService } from './services/auction-admin.service';
   ],
   imports: [
     BrowserModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
@@ -50,6 +52,7 @@ import { AuctionAdminService } from './services/auction-admin.service';
     MatSortModule,
     MatStepperModule,
     MatTabsModule,
+    DragDropModule,
     RouterModule.forRoot([
       {path:"",component:UserProfileComponent},
       {path:"Login",component:LoginComponent},
