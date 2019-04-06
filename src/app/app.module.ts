@@ -17,7 +17,7 @@ import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserService } from "./services/user.service";
 import { AuthService } from "./services/auth.service";
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AuctionAdminComponent } from './auction-admin/auction-admin.component';
+import { AuctionAdminComponent,BottomSheetOverviewExampleSheet } from './auction-admin/auction-admin.component';
 import { AuctionComponent } from './auction/auction.component';
 import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
@@ -25,6 +25,7 @@ import { ProductService } from './services/product.service';
 import { AuctionAdminService } from './services/auction-admin.service';
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,13 +36,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
     SignUpComponent,
     UserProfileComponent,
     AuctionAdminComponent,
-    AuctionComponent
+    AuctionComponent,
+    BottomSheetOverviewExampleSheet
   ],
   imports: [
     BrowserModule,
     MatExpansionModule,
     BrowserAnimationsModule,
     LayoutModule,
+    MatBottomSheetModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -73,6 +76,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     NgxMaterialTimepickerModule,
     HttpClientModule
     ],
+    entryComponents: [AuctionAdminComponent, BottomSheetOverviewExampleSheet],
   providers: [UserService,AuthService,AuctionService,WebsocketService,ProductService,AuctionAdminService],
   bootstrap: [AppComponent]
 })

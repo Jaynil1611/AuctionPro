@@ -5,6 +5,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import { ProductService } from '../services/product.service';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 @Component({
   selector: 'app-auction-admin',
   templateUrl: './auction-admin.component.html',
@@ -13,13 +14,15 @@ import { ProductService } from '../services/product.service';
 export class AuctionAdminComponent implements OnInit {
   constructor(private fb:FormBuilder,
       private aucadmin: AuctionAdminService,
-      private prods : ProductService) { }
+      private prods : ProductService,
+      private bottomSheet: MatBottomSheet,
+      ) { }
 
     Auctions =[];
-    ProductG =[];
-    ProductSelect=[];
+    // ProductG =[];
+    // ProductSelect=[];
     Auction:FormGroup;
-    panelOpenState = false;
+    // panelOpenState = false;
 
   ngOnInit() {
     this.Auction=this.fb.group({
@@ -46,16 +49,16 @@ export class AuctionAdminComponent implements OnInit {
         }
       })
 
-      this.prods.messages.subscribe(res=>
-        {
-          if(res["type"]="user_products")  
-          {
-            console.log(res);
-            this.ProductG=res["content"];
-            // this.ProductSelect=res["content"];
-          }
-        })
-        this.prods.getUserProducts({"content":JSON.parse(localStorage.currentUser).User_Id});
+      // this.prods.messages.subscribe(res=>
+      //   {
+      //     if(res["type"]="user_products")  
+      //     {
+      //       console.log(res);
+      //       this.ProductG=res["content"];
+      //       // this.ProductSelect=res["content"];
+      //     }
+      //   })
+      //   this.prods.getUserProducts({"content":JSON.parse(localStorage.currentUser).User_Id});
 
     
         
@@ -77,6 +80,47 @@ export class AuctionAdminComponent implements OnInit {
     }
   }
 
+  // drop(event: CdkDragDrop<any[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     transferArrayItem(event.previousContainer.data,
+  //                       event.container.data,
+  //                       event.previousIndex,
+  //                       event.currentIndex);
+  //   }
+  // }
+  openBottomSheet(): void {
+    this.bottomSheet.open(BottomSheetOverviewExampleSheet);
+  }
+
+}
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: 'bottom-sheet-overview-example-sheet.html',
+})
+export class BottomSheetOverviewExampleSheet {
+  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    private prods:ProductService) {}
+  ProductG =[];
+  ProductSelect=[""];
+  ngOnInit(){
+    
+    this.prods.messages.subscribe(res=>
+      {
+        if(res["type"]="user_products")  
+        {
+          console.log(res);
+          this.ProductG=res["content"];
+        }
+      })
+      this.prods.getUserProducts({"content":JSON.parse(localStorage.currentUser).User_Id});
+      
+  }
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -87,5 +131,4 @@ export class AuctionAdminComponent implements OnInit {
                         event.currentIndex);
     }
   }
-
 }

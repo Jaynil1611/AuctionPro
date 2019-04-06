@@ -39,6 +39,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <button mat-raised-button (click)="openBottomSheet()">Open file</button>
     <!-- <mat-accordion>
       <mat-expansion-panel (opened)="panelOpenState = true"
                            (closed)="panelOpenState = false">
@@ -53,7 +54,7 @@
         <p>I'm visible because I am open</p>
       </mat-expansion-panel>
     </mat-accordion> -->
-    <mat-card>
+    <!-- <mat-card>
       <div class="container">
         <h2>Products Selected </h2>
         
@@ -81,7 +82,7 @@
           <div class="box" *ngFor="let item of ProductG" cdkDrag>{{item.Product_name | json}}</div>
         </div>
       </div>      
-    </mat-card>
+    </mat-card> -->
   </mat-tab>
   <mat-tab label="Create Auction">
     <mat-card>
