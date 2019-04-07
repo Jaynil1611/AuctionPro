@@ -8,6 +8,18 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuctionService {
+  addAuctionProducts(msg) {
+    msg["type"]="selected_products";
+    this.messages.next(msg);
+  }
+  startAuction(msg) {
+    msg["type"]="start_auction";
+    this.messages.next(msg);
+  }
+  endAuction(msg){
+    msg["type"]="end_auction";
+    this.messages.next(msg);
+  }
   deleteProducts(msg) {
     msg["type"]="delete_user_products";
     this.messages.next(msg);

@@ -145,7 +145,7 @@ io.on("connection", socket => {
   })
 
   socket.on("auction_by_id",req=>{
-    let sql="Select Auction_Id,Title,Auction_description,Username,Auction.Created_at,Start_time,End_time from Auction,Users WHERE Auction_Id=? and Created_by=User_Id;";
+    let sql="Select Auction_Id,Title,Auction_description,Username,Auction.Created_at,Start_time,End_time,hasStarted,hasEnded from Auction,Users WHERE Auction_Id=? and Created_by=User_Id;";
     pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
       if(error)
         console.log(error);
@@ -155,7 +155,7 @@ io.on("connection", socket => {
   })
   socket.on("auction",req=>{
     req=JSON.parse(req);
-    let sql="Select Auction_Id,Title,Auction_description,Username,Auction.Created_at,Start_time,End_time from Auction,Users WHERE Created_by=User_Id and Auction_Id NOT IN (SELECT Auction_Id FROM Auction_users where Auction_users.User_Id="+req["content"]+")";
+    let sql="Select Auction_Id,Title,Auction_description,Username,Auction.Created_at,Start_time,End_time,hasStarted,hasEnded from Auction,Users WHERE Created_by=User_Id and Auction_Id NOT IN (SELECT Auction_Id FROM Auction_users where Auction_users.User_Id="+req["content"]+")";
     pool.query(sql,(error,rows,fields)=>{
       if(error)
         console.log(error);
@@ -228,6 +228,44 @@ io.on("connection", socket => {
       }
       else{
         socket.send({type:"delete_user_products",content:JSON.parse(req)});
+      }
+    })
+  })
+  socket.on("start_auction",req=>{
+    let sql="Update Auction set hasStarted=1 where Auction_Id=?";
+    pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
+      if(error)
+      {
+        console.log(error);
+      }
+      else{
+        io.emit("message",JSON.parse(req));
+      }
+    })
+  })
+  socket.on("end_auction",req=>{
+    let sql="Update Auction set hasEnded=1 where Auction_Id=?";
+    pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
+      if(error)
+      {
+        console.log(error);
+      }
+      else{
+        io.emit("message",JSON.parse(req));
+      }
+    })
+  })
+  socket.on("selected_products",auction=>{
+    let Auction=JSON.parse(auction);
+    delete Auction.type;
+    console.log(JSON.stringify(Auction));
+    let sql="Replace into Auction_product (Auction_Id,Product_Id) values ?";
+    pool.query(sql,[Auction],(error,rows,fields)=>{
+      if(error)
+      console.log(error);
+      else{
+        console.log(rows);
+        socket.send({type:"selected_products","content":rows});
       }
     })
   })

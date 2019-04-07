@@ -22,7 +22,8 @@ export class AuctionViewComponent implements OnInit {
   products:Product[]=[]
   auction_details={}
   constructor(private activatedRoute:ActivatedRoute,private auctionService:AuctionService,private snackbar:MatSnackBar) { }
-
+  // notactive=undefined;
+  // active="warn";
   ngOnInit() {
     this.auctionService.messages.subscribe(
       msg=>{
