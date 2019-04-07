@@ -3,9 +3,9 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar routerLink="/">{{currentUser==null ? 'Menu' : currentUser.Username}}</mat-toolbar>
+    <mat-toolbar routerLink="/Profile">{{currentUser==null ? 'Menu' : currentUser.Username}}</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Home</a>
+      <a mat-list-item href="#" routerLink=''>Home</a>
       <div class="none" *ngIf="currentUser && currentUser.Token; else loggedOut">
         <a mat-list-item href="#" routerLink='/Products'>Your Products</a>
         <a mat-list-item href="#" routerLink="/Auction">Your Auctions</a>

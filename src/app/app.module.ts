@@ -23,6 +23,8 @@ import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
 import { ProductService } from './services/product.service';
 import { AuctionAdminService } from './services/auction-admin.service';
+import { HomeComponent } from './home/home.component';
+import { AuctionViewComponent } from './auction/auction-view/auction-view.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AuctionAdminService } from './services/auction-admin.service';
     SignUpComponent,
     UserProfileComponent,
     AuctionAdminComponent,
-    AuctionComponent
+    AuctionComponent,
+    HomeComponent,
+    AuctionViewComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +55,15 @@ import { AuctionAdminService } from './services/auction-admin.service';
     MatStepperModule,
     MatTabsModule,
     RouterModule.forRoot([
-      {path:"",component:UserProfileComponent},
+      {path:"",component:HomeComponent},
+      {path:"Profile",component:UserProfileComponent},
       {path:"Login",component:LoginComponent},
       {path:"Sign_up",component:SignUpComponent},
       {path:"AuctionAdmin",component:AuctionAdminComponent},
       {path:"Auction",component:AuctionComponent},
-      {path :"Products",component: ProductsComponent}
+      {path :"Products",component: ProductsComponent},
+      {path :"AuctionView/:id" , component:AuctionViewComponent},
+      {path :"**",redirectTo:"Profile"}
     ]),
     MatInputModule,
     MatSelectModule,

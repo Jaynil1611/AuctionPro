@@ -1,8 +1,11 @@
 <mat-tab-group>
   <mat-tab label="Your Products"> 
-      <mat-card *ngFor = "let product of ProductList">
-          <p>{{product | json }}</p>
-        </mat-card>
+      <mat-card *ngFor="let product of ProductList" style="padding-bottom:2em" class="carousel-item">
+          <h2><span style="font-weight:lighter; opacity: 0.5;"> #{{product.Product_Id}}) </span> {{product.Product_name}}</h2>
+          <button mat-raised-button color="warn" style="float:right" (click)="deleteProduct(product.Product_Id)"><i class="material-icons">delete_sweep</i></button>
+          <p>{{product.Product_description}}</p>
+          <p style="color: greenyellow;">Base price :{{product.Base_price  | currency:'INR'}}</p>
+      </mat-card>
   </mat-tab>
   <mat-tab label="Second"> 
       <mat-card>

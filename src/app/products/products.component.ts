@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material';
-import { ProductService } from '../services/product.service';
+import { AuctionService } from '../services/auction.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -15,7 +15,7 @@ User_Id;
 Products : FormGroup;
 ProductList =[];
   constructor(private FB : FormBuilder, 
-              private prodservice : ProductService) { }
+              private prodservice : AuctionService) { }
 
   ngOnInit() {
     this.Products = this.FB.group({
@@ -34,11 +34,17 @@ ProductList =[];
           console.log(res);
           this.ProductList=res["content"];
           break;
+          case "delete_user_products":
+            console.log(res);
+            this.ProductList.splice(this.ProductList.findIndex((element,index,array)=>{
+              return (element.Product_Id==res.content.id);
+            }))
+            break;
           default:
             break;
         }
       })
-      this.prodservice.getUserProducts({"content":JSON.parse(localStorage.currentUser).User_Id});
+      this.prodservice.getProductsByUserId({"content":JSON.parse(localStorage.currentUser).User_Id});
   }
   addProduct(fb: FormGroup)
   {
@@ -48,6 +54,10 @@ ProductList =[];
       Prod["User_Id"]=JSON.parse(localStorage.currentUser).User_Id;
       this.prodservice.addProducts(Prod);
     }  
+  }
+
+  deleteProduct(id:number){
+    this.prodservice.deleteProducts({"content":id});
   }
 
 
