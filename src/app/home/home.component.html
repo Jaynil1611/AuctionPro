@@ -1,0 +1,29 @@
+<div class="container" *ngIf="![isLogged]; else elseBlock">
+<h2>All Auctions</h2>
+<mat-card *ngFor="let auction_details of Auctions">
+  <h2><span style="font-weight:lighter; opacity: 0.5;">#{{auction_details.Auction_Id}} )</span> {{auction_details.Title}}</h2>
+  <p>{{auction_details.Auction_description}}</p>
+  <p> <b>FROM</b> {{auction_details.Start_time|date:'short'}} <b>- TO</b> {{auction_details.End_time|date:'short'}} </p>
+  <p style="text-align:right">-- <b>By</b> {{auction_details.Username}} </p>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="[ '/AuctionView',auction_details.Auction_Id]">View</button>
+    <button mat-raised-button color="accent" style="float:right" (click)="joinAuction(auction_details)">Join</button>
+</mat-card-actions>
+<mat-divider></mat-divider>
+</mat-card>
+<h2>Auctions with you</h2>
+<mat-card *ngFor="let auction_details of Auctions_With_Me">
+  <h2><span style="font-weight:lighter; opacity: 0.5;">#{{auction_details.Auction_Id}} )</span> {{auction_details.Title}}</h2>
+  <p>{{auction_details.Auction_description}}</p>
+  <p> <b>FROM</b> {{auction_details.Start_time|date:'short'}} <b>- TO</b> {{auction_details.End_time|date:'short'}} </p>
+  <p style="text-align:right">-- <b>By</b> {{auction_details.Username}} </p>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="[ '/AuctionView',auction_details.Auction_Id]">View</button>
+    <button mat-raised-button color="accent" style="float:right" (click)="leaveAuction(auction_details)">Leave</button>
+</mat-card-actions>
+<mat-divider></mat-divider>
+</mat-card>
+</div>
+<ng-template #elseBlock>
+    <img src="https://d2jv9003bew7ag.cloudfront.net/uploads/Online-Auction-Houses-A-New-Paradigm-FEATURED.jpg" style="width: 100%;background-size: contain">
+</ng-template>

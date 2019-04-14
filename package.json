@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
-    "@angular/cdk": "^7.3.6",
+    "@angular/cdk": "~7.3.5",
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
     "@angular/core": "~7.2.0",
@@ -23,7 +23,6 @@
     "@angular/router": "~7.2.0",
     "@types/materialize-css": "^1.0.6",
     "@types/socket.io-client": "^1.4.32",
-    "angular-material-expansion-panel": "^0.7.2",
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",

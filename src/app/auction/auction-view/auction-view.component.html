@@ -1,0 +1,17 @@
+<mat-card>
+    <h2><span style="font-weight:lighter; opacity: 0.5;">#{{auction_details.Auction_Id}} )</span> {{auction_details.Title}}</h2>
+    <p>{{auction_details.Auction_description}}</p>
+    <p> <b>FROM</b> {{auction_details.Start_time}} <b>- TO</b> {{auction_details.End_time}} </p>
+    <mat-chip-list>
+      <mat-chip *ngIf="!(auction_details.hasStarted)" > COMING SOON </mat-chip>
+      <mat-chip *ngIf="auction_details.hasStarted && !auction_details.hasEnded" color="primary" selected> ACTIVE </mat-chip>
+      <mat-chip *ngIf="auction_details.hasEnded" color="warn" selected> ENDED </mat-chip>
+    </mat-chip-list>
+    <p style="text-align:right">-- <b>By</b> {{auction_details.Username}} </p>
+    <mat-card *ngFor="let product of products" style="padding-bottom:2em" class="carousel-item">
+      <h3>{{product.Product_name}}</h3>
+      <p>{{product.Product_description}}</p>
+      <p>{{product.Base_price}}</p>
+      <button mat-fab (click)="doBid(product)" style="float:right ;z-index:1">+</button>
+    </mat-card>
+</mat-card>

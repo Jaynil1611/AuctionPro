@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule,MatTabsModule,MatDatepickerModule,MatNativeDateModule, MatSnackBarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule, MatRadioModule, MatCardModule,MatStepperModule,MatTabsModule,MatDatepickerModule,MatNativeDateModule, MatSnackBarModule, MatChipsModule, MatBottomSheet, MatBottomSheetModule } from '@angular/material';
 import { DataTableComponent } from './data-table/data-table.component';
 import { LoginComponent } from './forms/login/login.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
@@ -23,9 +23,10 @@ import { AuctionService } from './services/auction.service';
 import { WebsocketService } from './services/websocket.service';
 import { ProductService } from './services/product.service';
 import { AuctionAdminService } from './services/auction-admin.service';
-import { DragDropModule } from "@angular/cdk/drag-drop";
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { HomeComponent } from './home/home.component';
+import { AuctionViewComponent } from './auction/auction-view/auction-view.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,32 +38,37 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     UserProfileComponent,
     AuctionAdminComponent,
     AuctionComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    HomeComponent,
+    AuctionViewComponent
   ],
   imports: [
     BrowserModule,
-    MatExpansionModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatBottomSheetModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatBottomSheetModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    DragDropModule,
     MatStepperModule,
     MatTabsModule,
-    DragDropModule,
+    MatChipsModule,
     RouterModule.forRoot([
-      {path:"",component:UserProfileComponent},
+      {path:"",component:HomeComponent},
+      {path:"Profile",component:UserProfileComponent},
       {path:"Login",component:LoginComponent},
       {path:"Sign_up",component:SignUpComponent},
       {path:"AuctionAdmin",component:AuctionAdminComponent},
       {path:"Auction",component:AuctionComponent},
-      {path :"Products",component: ProductsComponent}
+      {path :"Products",component: ProductsComponent},
+      {path :"AuctionView/:id" , component:AuctionViewComponent},
+      {path :"**",redirectTo:"Profile"}
     ]),
     MatInputModule,
     MatSelectModule,

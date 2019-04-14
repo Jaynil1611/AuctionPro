@@ -9,7 +9,7 @@
         [cdkDropListConnectedTo]="[ProductGList]"
         class="list"
         (cdkDropListDropped)="drop($event)">
-        <div class="box" *ngFor="let item of ProductSelect" cdkDrag>{{item | json }}</div>
+        <mat-card *ngFor="let item of ProductSelect" cdkDrag>{{item.Product_name }}</mat-card>
       </div>
     </div>
     <br>
@@ -23,7 +23,7 @@
         [cdkDropListConnectedTo]="[ProductSelectList]"
         class="list"
         (cdkDropListDropped)="drop($event)">
-        <div class="box" *ngFor="let item of ProductG" cdkDrag>{{item.Product_name | json}}</div>
+        <mat-card *ngFor="let item of ProductG" cdkDrag>{{item.Product_name}}</mat-card>
       </div>
     </div>      
   </mat-card>
