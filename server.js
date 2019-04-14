@@ -244,7 +244,9 @@ io.on("connection", socket => {
     })
   })
   socket.on("end_auction",req=>{
-    let sql="Update Auction set hasEnded=1 where Auction_Id=?";
+    let sql="Update Auction set hasEnded=1 where Auction_Id=?"
+    +"REPLACE INTO Product_sold SELECT DISTINCT `User_Id`, `Product_Id`, `Bid_amount` FROM `Bid` WHERE `Bid_amount` in (	SELECT MAX(`Bid_amount`) FROM `Bid` GROUP BY `Product_Id`);"
+    +"UPDATE `Product` INNER JOIN (SELECT DISTINCT `User_Id`, `Product_Id`, `Bid_amount` FROM `Bid` WHERE `Bid_amount` in ( SELECT MAX(`Bid_amount`) FROM `Bid` GROUP BY `Product_Id`)) AS `Bd` ON `Bd`.`Product_Id`=`Product`.`Product_Id` SET Product.User_Id=Bd.User_Id,Product.Base_price=Bd.Bid_amount";
     pool.query(sql,[JSON.parse(req).content],(error,rows,fields)=>{
       if(error)
       {
