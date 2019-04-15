@@ -1,0 +1,29 @@
+<mat-card>
+    <div class="container">
+      <h2>Products Selected </h2>
+      
+      <div
+        cdkDropList
+        #ProductSelectList="cdkDropList"
+        [cdkDropListData]="ProductSelect"
+        [cdkDropListConnectedTo]="[ProductGList]"
+        class="list"
+        (cdkDropListDropped)="drop($event)">
+        <mat-card *ngFor="let item of ProductSelect" cdkDrag>{{item.Product_name }}</mat-card>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <h2>Choose Products </h2>
+    
+      <div
+        cdkDropList
+        #ProductGList="cdkDropList"
+        [cdkDropListData]="ProductG"
+        [cdkDropListConnectedTo]="[ProductSelectList]"
+        class="list"
+        (cdkDropListDropped)="drop($event)">
+        <mat-card *ngFor="let item of ProductG" cdkDrag>{{item.Product_name}}</mat-card>
+      </div>
+    </div>      
+  </mat-card>

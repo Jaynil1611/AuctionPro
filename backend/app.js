@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const pool = require('./database');
 const jwt = require('jsonwebtoken');
 const app = express();
-
+const path=require('path')
+app.use(express.static(path.join(__dirname,"../dist/SecureOnlineAuction/")));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -156,6 +157,10 @@ app.post("/api/Login",(req,res)=>{
                 
             }
         })
+})
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,"../dist/SecureOnlineAuction/index.html"));
 })
 
 module.exports=app;
