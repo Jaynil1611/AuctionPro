@@ -13,7 +13,6 @@ import { Users } from '../models';
 })
 export class NavbarComponent implements OnInit{
   currentUser: Users;
-  islogged;
   currentUserSubscription: Subscription;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -21,7 +20,6 @@ export class NavbarComponent implements OnInit{
     );
   
   ngOnInit(){
-    this.islogged=JSON.parse(localStorage.currentUser);
   }
   logout(){
     console.log("logout()");
