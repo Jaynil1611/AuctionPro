@@ -15,6 +15,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
     this.isLogged=JSON.parse(localStorage.currentUser);
+  constructor(private auctionService:AuctionService) { }
+
+  ngOnInit() {
     this.auctionService.messages.subscribe(
       msg=>{
         switch (msg["type"]) {
