@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   isLogged: any;
   constructor(private auctionService:AuctionService) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.isLogged=JSON.parse(localStorage.currentUser);
     this.auctionService.messages.subscribe(
       msg=>{
