@@ -10,9 +10,12 @@ import { element } from '@angular/core/src/render3';
 export class HomeComponent implements OnInit {
   Auctions=[]
   Auctions_With_Me=[]
+  isLogged: any;
   constructor(private auctionService:AuctionService) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.isLogged=JSON.parse(localStorage.currentUser);
+    console.log(this.isLogged);
     this.auctionService.messages.subscribe(
       msg=>{
         switch (msg["type"]) {

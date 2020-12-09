@@ -19,9 +19,9 @@ ProductList =[];
 
   ngOnInit() {
     this.Products = this.FB.group({
-      Product_name : ['',Validators.required],
-      Product_description : ['',Validators.required],
-      Base_price : ['',Validators.required]
+      Product_name : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(16)]],
+      Product_description : ['',[Validators.required,Validators.minLength(10),Validators.maxLength(100)]],
+      Base_price : ['',[Validators.required,Validators.nullValidator]]
     })
     this.prodservice.messages.subscribe(res=>
       {
