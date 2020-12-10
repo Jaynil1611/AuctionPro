@@ -24,7 +24,7 @@
     "@types/materialize-css": "^1.0.6",
     "@types/socket.io-client": "^1.4.32",
     "body-parser": "^1.18.3",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
     "express": "^4.16.4",
