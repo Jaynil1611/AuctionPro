@@ -31,7 +31,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
-    "luxon": "^1.12.0",
+    "luxon": "^2.5.2",
     "materialize-css": "^1.0.0",
     "mysql2": "^1.6.5",
     "ngx-material-timepicker": "^3.0.2",
